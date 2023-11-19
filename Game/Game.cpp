@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
-//#include <Windows.h>
+#include <Windows.h>
 using namespace std;
 
 void check_word_size(size_t size) {
@@ -21,7 +21,7 @@ void check_letters(map <char, int> start_word_letters, string temp_word) {
 		temp_word_letters[tolower(c)]--;
 
 		if (temp_word_letters[tolower(c)] < 0) {
-			throw string{ " player lost" };
+			throw string{ " игрок проиграл" };
 		}
 
 	}
@@ -29,7 +29,7 @@ void check_letters(map <char, int> start_word_letters, string temp_word) {
 
 int main() {
 	setlocale(LC_ALL, "ru");
-	//SetConsoleCP(1251);
+	SetConsoleCP(1251);
 	string start_word;
 	string temp_word;
 
