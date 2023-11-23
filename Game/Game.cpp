@@ -2,7 +2,6 @@
 #include <map>
 #include <string>
 #include <Windows.h>
-#include <ctime>
 
 using namespace std;
 
@@ -12,7 +11,7 @@ void check_word_size(size_t size) {
 	}
 }
 
-void check_letters(map <char, int> start_word_letters, string temp_word, int player_number) {
+void check_letters(map <char, int> start_word_letters, string temp_word, int current_player) {
 	map <char, int> temp_word_letters = start_word_letters;
 
 	for (char& c : temp_word) {
@@ -20,7 +19,7 @@ void check_letters(map <char, int> start_word_letters, string temp_word, int pla
 		temp_word_letters[tolower(c)]--;
 
 		if (temp_word_letters[tolower(c)] < 0) {
-			throw string{ " player lost" };
+			throw string{to_string(current_player) + " player lost" };
 		}
 	}
 }
@@ -38,9 +37,9 @@ int main() {
 	{
 		check_word_size(start_word.size());
 	}
-	catch (const string error_message)
+	catch (const string wrong_size)
 	{
-		cout << error_message;
+		cout << wrong_size;
 		exit(1);
 	}
 
@@ -51,12 +50,13 @@ int main() {
 
 	int count = 0;
 	while (true) {
-		int player_number = count % 2 + 1;
-		cout << player_number << " player enters a word : ";
+		int current_player = count % 2 + 1;
+
+		cout << current_player << " player enters a word : ";
 		cin >> current_word;
 
 		try {
-			check_letters(start_word_letters, current_word, player_number);
+			check_letters(start_word_letters, current_word, current_player);
 		}
 		catch (const string player_lost) {
 			cout << player_lost;
