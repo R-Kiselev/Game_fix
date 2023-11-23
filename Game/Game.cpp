@@ -12,13 +12,13 @@ void check_word_size(size_t size) {
 }
 
 void check_letters(map <char, int> start_word_letters, string temp_word, int current_player) {
-	map <char, int> temp_word_letters = start_word_letters;
+	map <char, int> current_word_letters = start_word_letters;
 
 	for (char& c : temp_word) {
 		// tolower() is used to ignore letter case 
-		temp_word_letters[tolower(c)]--;
+		current_word_letters[tolower(c)]--;
 
-		if (temp_word_letters[tolower(c)] < 0) {
+		if (current_word_letters[tolower(c)] < 0) {
 			throw string{to_string(current_player) + " player lost" };
 		}
 	}
